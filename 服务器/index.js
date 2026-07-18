@@ -1,32 +1,40 @@
 /**
  * OpenClaw 服务器入口
- * 适用于 Node.js 托管平台（Wispbyte 等）
- * 
- * 平台会自动执行 npm install → npm start
+ * 适用于 Wispbyte 等 Node.js 托管平台
  */
-
 import { runLegacyCliEntry } from 'openclaw';
 
-// ---------- 环境变量配置 ----------
-// 这些可以在平台的控制面板里设置，不用改代码
+// ===== 【重要】修改这个密码！ =====
+const GATEWAY_TOKEN = 'your-secret-token-here';
 
-// 端口：托管平台通常会提供 PORT 环境变量
-process.env.OPENCLAW_GATEWAY_PORT = process.env.PORT || '8080';
+// ===== 启动配置 =====
+// 端口：托管平台会提供 PORT 环境变量
+const PORT = process.env.PORT || '8080';
 
-// 状态目录（存聊天记录、配置等）
-process.env.OPENCLAW_STATE_DIR = process.env.OPENCLAW_STATE_DIR || './data/.openclaw';
+// 状态目录
+const STATE_DIR = process.env.OPENCLAW_STATE_DIR || '/home/container/data/.openclaw';
 
-// 工作区目录（存记忆文件）
-process.env.OPENCLAW_WORKSPACE_DIR = process.env.OPENCLAW_WORKSPACE_DIR || './workspace';
+// 工作区目录
+const WORKSPACE_DIR = process.env.OPENCLAW_WORKSPACE_DIR || '/home/container/workspace';
 
-// 管理密码——【重要】务必修改！
-process.env.OPENCLAW_GATEWAY_TOKEN = process.env.OPENCLAW_GATEWAY_TOKEN || 'your-secret-token-here';
+// 设置环境变量
+process.env.OPENCLAW_GATEWAY_PORT = PORT;
+process.env.OPENCLAW_STATE_DIR = STATE_DIR;
+process.env.OPENCLAW_WORKSPACE_DIR = WORKSPACE_DIR;
+process.env.OPENCLAW_GATEWAY_TOKEN = GATEWAY_TOKEN;
+process.env.OPENCLAW_HOST = '0.0.0.0';
 
-// ---------- 启动 Gateway ----------
+// 创建必要目录
+import { mkdirSync, existsSync } from 'fs';
+
+for (const dir of [STATE_DIR, WORKSPACE_DIR]) {
+  if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+}
+
 console.log('🚀 OpenClaw Gateway 启动中...');
-console.log(`📡 端口: ${process.env.OPENCLAW_GATEWAY_PORT}`);
-console.log(`📁 工作区: ${process.env.OPENCLAW_WORKSPACE_DIR}`);
+console.log(`📡 地址: 0.0.0.0:${PORT}`);
 console.log(`🔗 访问: /openclaw`);
+console.log(`🔑 Token: ${GATEWAY_TOKEN === 'your-secret-token-here' ? '⚠️  请修改密码！' : '✅ 已设置'}`);
 
 try {
   await runLegacyCliEntry(['node', 'openclaw', 'gateway', 'start']);
