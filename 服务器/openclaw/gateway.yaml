@@ -1,0 +1,26 @@
+# OpenClaw Gateway 配置文件
+# 部署路径: ~/.config/openclaw/gateway.yaml
+
+gateway:
+  host: 127.0.0.1
+  port: 8080
+
+  # 认证 - 请务必修改此密码！
+  auth:
+    token: "your-secret-token-here"
+
+  # 状态目录 - 持久化 OpenClaw 状态
+  stateDir: /data/.openclaw
+
+  # 工作区目录
+  workspaceDir: /data/workspace
+
+  # 远程访问安全
+  remote:
+    # 生产环境绑定 loopback + Cloudflare Tunnel
+    bind: loopback
+
+# 日志
+logging:
+  level: info
+  format: text
