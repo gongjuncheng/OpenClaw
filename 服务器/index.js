@@ -28,7 +28,7 @@ console.log(`🔑 Token: ${TOKEN === 'admin123' ? '⚠️ 请改密码！' : '�
 
 // 直接 spawn openclaw 进程
 const openclawPath = join(__dirname, 'node_modules', 'openclaw', 'openclaw.mjs');
-const proc = spawn('node', [openclawPath, 'gateway', 'run', '--port', PORT], {
+const proc = spawn('node', [openclawPath, 'gateway', 'run', '--port', PORT, '--allow-unconfigured'], {
   stdio: 'inherit',
   env: {
     ...process.env,
