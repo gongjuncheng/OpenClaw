@@ -10,7 +10,7 @@ import { mkdirSync, existsSync } from 'fs';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // ===== 配置 =====
-const TOKEN = process.env.OPENCLAW_GATEWAY_TOKEN || 'admin123';
+const TOKEN = process.env.OPENCLAW_GATEWAY_TOKEN || 'admin';
 const PORT = process.env.PORT || '8080';
 
 // 创建必要目录
