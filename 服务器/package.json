@@ -1,0 +1,14 @@
+{
+  "name": "openclaw-server",
+  "version": "1.0.0",
+  "description": "OpenClaw AI 助手 - 服务器部署",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "setup": "node setup.js"
+  },
+  "dependencies": {
+    "openclaw": "latest"
+  }
+}
