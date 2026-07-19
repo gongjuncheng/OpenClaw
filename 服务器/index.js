@@ -12,7 +12,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 // ===== 配置 =====
 const TOKEN = process.env.OPENCLAW_GATEWAY_TOKEN || 'admin';
 const PORT = process.env.SERVER_PORT || process.env.PORT || '8080';
-const DEEPSEEK_KEY = process.env.DEEPSEEK_API_KEY || '';
+const DEEPSEEK_KEY = process.env.sk-e74f1d9cec8a4fad9f4f815ad3622607 || '';
 
 // 创建必要目录
 for (const dir of [
